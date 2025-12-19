@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Nick Yaeger</title>
+    <script>
+        // Apply saved theme (or URL param) as early as possible to avoid flash
+        (function(){
+            try {
+                var params = new URLSearchParams(location.search);
+                var urlTheme = params.get('theme');
+                if (urlTheme === 'dark') {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    return;
+                }
+                var t = localStorage.getItem('theme');
+                if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+            } catch(e) {
+                // ignore
+            }
+        })();
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav>
+        <div class="logo"><strong>Nick Yaeger</strong></div>
+        <button id="hamburger" class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <div class="nav-links" id="nav-menu">
+            <a href="index.html">Home</a>
+            <a href="projects.html">Projects</a>
+            <a href="reviews.html">Course Reviews</a>
+            <a href="resume.html">Resume</a>
+            <button id="theme-toggle" aria-pressed="false" aria-label="Activate dark mode" title="Toggle theme">
+                <span class="sr-only">Toggle theme</span>
+                <!-- Moon (default for light theme) -->
+                <svg class="icon icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                    <path fill="currentColor" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+                </svg>
+                <!-- Sun (shown in dark theme) -->
+                <svg class="icon icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <main class="container">
+        <h2>Projects</h2>
+        <br>
+        <div class="project-grid">
+            
+            <article class="card">
+                <img src="cmr.png" alt="Embedded Systems @ CMR" class="card-image">
+                <h3>Embedded Systems @ CMR</h3>
+                <p>Designed and currently testing our Dynamics Controller Module, responsible for vechicle controls and cooling loop. Also designed PCBs for our CAN-based data acqusition pipeline.</p>
+                <div class="tech-stack">Altium Designer, STM32 SoC, FreeRTOS</div>
+                <br>
+                <a href="26x_DCM.pdf">View Documentation &rarr;</a>
+            </article>
+
+            <article class="card">
+                <img src="3d_seg.png" alt="3D Image Segmentation" class="card-image">
+                <h3>3D Image Segmentation</h3>
+                <p>Wrote a program that, given a prompt and a dataset of object perspectives, segments the desired object from its surroundings and constructs a 3D point cloud representation.</p>
+                <div class="tech-stack">OpenCV, NumPy, Segment Anything Model</div>
+                <br>
+            </article>
+
+            <article class="card">
+                <img src="chron.png" alt="Chron Smartwatch" class="card-image">
+                <h3>Chron Smartwatch</h3>
+                <p>Building a smartwatch from scratch. Capabilities include step counter, heart rate monitor, oximeter, temperature + pressure, raise-to-wake, wireless communication over Bluetooth Low Energy.</p>
+                <div class="tech-stack">C, ZephyrRTOS, nRF54l15 SoC, BLE</div>
+                <br>
+                <a href="https://github.com/nickyaeger/chron">View Documentation &rarr;</a>
+            </article>
+
+            <article class="card">
+                <img src="wake_n_shake.png" alt="Wake 'n' Shake Alarm" class="card-image">
+                <h3>Wake 'n' Shake Alarm</h3>
+                <p>Built an alarm clock to help people like myself get up in the morning. It only stops ringing when you complete a mental or physical task, such as a memory game or pushups.</p>
+                <div class="tech-stack">Raspberry Pi, OpenCV, MediaPipe</div>
+                <br>
+                <a href="https://github.com/nickyaeger/WnS">View Documentation &rarr;</a>
+            </article>
+
+            <article class="card">
+                <img src="pong.png" alt="FPGA Pong" class="card-image">
+                <h3>FPGA Pong</h3>
+                <p>Designed a hardware implementation of Pong, synthesized on an FPGA. Includes a VGA interface for the display.</p>
+                <div class="tech-stack">SystemVerilog, Xilinx Vivado, VGA</div>
+                <br>
+            </article>
+
+            <article class="card">
+                <img src="fwr.png" alt="Fun With Robots Lab Exercises" class="card-image">
+                <h3>Fun With Robots Lab Exercises</h3>
+                <p>Starter code for the robotics course I teach.</p>
+                <div class="tech-stack">C++, Arduino, Romi 32U4 Control Board</div>
+                <br>
+                <a href="https://github.com/fwr-stuco">View Documentation &rarr;</a>
+            </article>
+
+        </div>
+    </main>
+
+    <footer>
+        <p id="random-quote" class="footer-quote"></p>
+        <p>Contact me: <a href="#">nickyaeger[at]cmu.edu</a> | <a href="https://www.linkedin.com/in/nick-yaeger/">LinkedIn</a> | <a href="https://github.com/nickyaeger">GitHub</a></p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

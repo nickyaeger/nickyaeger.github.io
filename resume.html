@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume | Nick Yaeger</title>
+    <script>
+        // Apply saved theme (or URL param) as early as possible to avoid flash
+        (function(){
+            try {
+                var params = new URLSearchParams(location.search);
+                var urlTheme = params.get('theme');
+                if (urlTheme === 'dark') {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    return;
+                }
+                var t = localStorage.getItem('theme');
+                if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+            } catch(e) {
+                // ignore
+            }
+        })();
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav>
+        <div class="logo"><strong>Nick Yaeger</strong></div>
+        <button id="hamburger" class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <div class="nav-links" id="nav-menu">
+            <a href="index.html">Home</a>
+            <a href="projects.html">Projects</a>
+            <a href="reviews.html">Course Reviews</a>
+            <a href="resume.html">Resume</a>
+            <button id="theme-toggle" aria-pressed="false" aria-label="Activate dark mode" title="Toggle theme">
+                <span class="sr-only">Toggle theme</span>
+                <!-- Moon (default for light theme) -->
+                <svg class="icon icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                    <path fill="currentColor" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+                </svg>
+                <!-- Sun (shown in dark theme) -->
+                <svg class="icon icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <main class="container">
+        <h2>Resume</h2>
+        <div class="resume-container">
+            <div class="resume-header">
+                <p>View or download my resume below.</p>
+                <a href="resume.pdf" download class="download-btn">Download PDF</a>
+            </div>
+            <div class="resume-viewer">
+                <embed src="resume.pdf" type="application/pdf" width="100%" height="800px" />
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p id="random-quote" class="footer-quote"></p>
+        <p>Contact me: <a href="#">nickyaeger[at]cmu.edu</a> | <a href="https://www.linkedin.com/in/nick-yaeger/">LinkedIn</a> | <a href="https://github.com/nickyaeger">GitHub</a></p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

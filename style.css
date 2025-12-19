@@ -1,0 +1,583 @@
+/* --- Variables & Theming --- */
+:root {
+    --bg-color: #ffffff;
+    --card-bg: #f4f4f4;
+    --section-bg: #f8f8f8; /* Header/Footer background */
+    --text-main: #333333;
+    --text-muted: #666666;
+    --accent: #0056b3; /* Engineering Blue */
+    --accent-secondary: #00b4d8; /* Cool Teal */
+    --border: #dddddd;
+    --nav-height: 60px;
+}
+
+[data-theme="dark"] {
+    --bg-color: #121212;
+    --card-bg: #1e1e1e;
+    --section-bg: #0a0a0a; /* Darker header/footer background */
+    --text-main: #e0e0e0;
+    --text-muted: #a0a0a0;
+    --accent: #4dabf7;
+    --accent-secondary: #00d9ff; /* Bright Teal */
+    --border: #333333;
+}
+
+/* --- Global Reset --- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+a { text-decoration: none; color: var(--accent); }
+a:visited { color: var(--accent); }
+a:hover { text-decoration: underline; }
+a:active { color: var(--accent); }
+
+/* --- Lists --- */
+ul {
+    list-style: none;
+    padding-left: 1.5rem;
+}
+
+ul li {
+    position: relative;
+    margin-bottom: 0.5rem;
+}
+
+ul li::before {
+    content: "";
+    position: absolute;
+    left: -1.5rem;
+    top: 0.7rem;
+    width: 6px;
+    height: 6px;
+    background-color: var(--accent-secondary);
+}
+
+/* --- Layout Utilities --- */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* --- Navigation --- */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    height: var(--nav-height);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background-color: var(--section-bg);
+    z-index: 100;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links a { margin-left: 20px; font-weight: 500; color: var(--text-main); }
+.nav-links a:hover { color: var(--accent); }
+
+/* Hamburger menu (hidden by default) */
+#hamburger {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-main);
+    cursor: pointer;
+    flex-direction: column;
+    gap: 5px;
+    padding: 8px;
+    margin-right: 10px;
+}
+
+#hamburger span {
+    width: 24px;
+    height: 2px;
+    background-color: var(--text-main);
+    transition: all 0.3s ease;
+    display: block;
+}
+
+#hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+#hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+#hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* --- Theme Toggle Button --- */
+#theme-toggle {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: transform 0.12s ease, border-color 0.12s ease, color 0.12s ease, background-color 0.12s ease;
+    margin-left: 24px;
+}
+
+/* Slight background in dark mode to match screenshot */
+[data-theme="dark"] #theme-toggle {
+    background-color: rgba(255,255,255,0.02);
+    border-color: rgba(255,255,255,0.06);
+}
+
+/* Accessible visually-hidden helper */
+.sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+/* Icon sizing and transition */
+#theme-toggle .icon {
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    display: inline-block;
+}
+
+/* Default: show moon icon (light mode) */
+#theme-toggle .icon-sun { display: none; }
+
+/* When dark theme active, show sun and hide moon */
+[data-theme="dark"] #theme-toggle .icon-sun { display: inline-block; }
+[data-theme="dark"] #theme-toggle .icon-moon { display: none; }
+
+/* Hover/focus styles */
+#theme-toggle:hover, #theme-toggle:focus {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-1px);
+}
+
+#theme-toggle:focus {
+    outline: 3px solid rgba(0,86,179,0.12);
+    outline-offset: 2px;
+}
+
+/* --- Sections --- */
+.hero { text-align: center; padding: 4rem 0; }
+.profile-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    border: 3px solid var(--accent-secondary);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.15);
+    transition: box-shadow 0.3s ease;
+}
+
+.profile-img:hover {
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.25);
+}
+
+[data-theme="dark"] .profile-img {
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .profile-img:hover {
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+}
+
+/* --- Projects Grid --- */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--accent-secondary);
+    padding: 0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.card-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    border-bottom: 1px solid var(--border);
+}
+
+.card > *:not(.card-image) {
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+}
+
+.card > h3 {
+    margin-top: 1.5rem;
+}
+
+.card > a:last-child {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+}
+
+.tech-stack {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+    font-family: monospace;
+}
+
+/* --- Course Reviews --- */
+.semester-block { margin-bottom: 3rem; }
+.semester-title { 
+    border-bottom: 2px solid var(--accent-secondary); 
+    padding-bottom: 0.5rem; 
+    margin-bottom: 1rem;
+}
+.review-item { margin-bottom: 1.5rem; }
+.course-code {
+    font-weight: bold;
+    color: var(--accent-secondary);
+}
+
+/* --- Footer --- */
+footer {
+    text-align: center;
+    padding: 2rem;
+    margin-top: 3rem;
+    border-top: 1px solid var(--border);
+    background-color: var(--section-bg);
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.footer-quote {
+    font-style: italic;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+/* --- Resume Page --- */
+.resume-container {
+    margin-top: 1.5rem;
+}
+
+.resume-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    gap: 2rem;
+}
+
+.resume-header p {
+    margin: 0;
+}
+
+.download-btn {
+    color: var(--accent-secondary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.download-btn:hover {
+    text-decoration: underline;
+}
+
+.resume-viewer {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 1rem;
+}
+
+/* --- Media Queries for Responsiveness --- */
+
+/* Tablet screens (768px and below) */
+@media (max-width: 768px) {
+    :root {
+        --nav-height: 56px;
+    }
+
+    .container {
+        padding: 1.5rem;
+    }
+
+    nav {
+        padding: 0 1rem;
+    }
+
+    .nav-links a {
+        margin-left: 14px;
+        font-size: 0.95rem;
+    }
+
+    #theme-toggle {
+        margin-left: 14px;
+        padding: 6px 10px;
+    }
+
+    #theme-toggle .icon {
+        width: 16px;
+        height: 16px;
+    }
+
+    .hero {
+        padding: 2.5rem 0;
+    }
+
+    .profile-img {
+        width: 120px;
+        height: 120px;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    h3 {
+        font-size: 1.1rem;
+    }
+
+    .project-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .card {
+        padding: 1.2rem;
+    }
+
+    .resume-header {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 1.5rem;
+        gap: 1rem;
+    }
+
+    .resume-viewer embed {
+        height: 500px !important;
+    }
+
+    .semester-block {
+        margin-bottom: 2rem;
+    }
+
+    footer {
+        padding: 1.5rem 1rem;
+        font-size: 0.85rem;
+    }
+
+    .footer-quote {
+        font-size: 0.85rem;
+        margin-bottom: 0.8rem;
+    }
+}
+
+/* Mobile screens (600px and below) */
+@media (max-width: 600px) {
+    :root {
+        --nav-height: 50px;
+    }
+
+    body {
+        font-size: 14px;
+    }
+
+    .container {
+        padding: 1rem;
+        max-width: 100%;
+    }
+
+    nav {
+        padding: 0 0.75rem;
+        height: var(--nav-height);
+        flex-wrap: wrap;
+    }
+
+    .logo {
+        font-size: 0.85rem;
+        white-space: nowrap;
+    }
+
+    #hamburger {
+        display: flex;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: var(--nav-height);
+        left: 0;
+        right: 0;
+        background-color: var(--section-bg);
+        border-bottom: 1px solid var(--border);
+        padding: 1rem 0.75rem;
+        gap: 0.5rem;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links a {
+        margin-left: 0;
+        font-size: 0.9rem;
+        font-weight: 500;
+        padding: 0.5rem 0;
+        display: block;
+    }
+
+    /* Align theme toggle with menu items inside the dropdown */
+    .nav-links #theme-toggle {
+        margin-left: 0;
+        padding: 5px 8px;
+        align-self: center;
+        margin-top: 0.25rem;
+    }
+
+    #theme-toggle .icon {
+        width: 16px;
+        height: 16px;
+    }
+
+    .hero {
+        padding: 1.5rem 0;
+    }
+
+    .profile-img {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 0.8rem;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+        padding-left: 8px;
+    }
+
+    h3 {
+        font-size: 1rem;
+        padding-left: 6px;
+    }
+
+    .project-grid {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+
+    .card {
+        padding: 1rem;
+        border-radius: 6px;
+    }
+
+    .card h3 {
+        font-size: 0.95rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .card p {
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .tech-stack {
+        font-size: 0.75rem;
+        margin-top: 0.3rem;
+    }
+
+    .resume-header {
+        flex-direction: column;
+        align-items: stretch;
+        margin-bottom: 1rem;
+        gap: 0.8rem;
+    }
+
+    .resume-header p {
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    .download-btn {
+        display: block;
+        text-align: center;
+        padding: 0.5rem;
+        border: 1px solid var(--accent-secondary);
+        border-radius: 4px;
+    }
+
+    .resume-viewer embed {
+        height: 400px !important;
+    }
+
+    .semester-block {
+        margin-bottom: 1.5rem;
+    }
+
+    .semester-title {
+        font-size: 1.05rem;
+        padding-bottom: 0.4rem;
+    }
+
+    .review-item {
+        margin-bottom: 1rem;
+    }
+
+    .course-code {
+        font-size: 0.9rem;
+    }
+
+    footer {
+        padding: 1rem 0.75rem;
+        margin-top: 2rem;
+        font-size: 0.8rem;
+    }
+
+    .footer-quote {
+        font-size: 0.8rem;
+        margin-bottom: 0.6rem;
+    }
+
+    footer p {
+        margin-bottom: 0.5rem;
+    }
+
+    footer a {
+        word-break: break-word;
+    }
+}
